@@ -6,16 +6,16 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Player
 {
-    [SerializeField] private Image panal;
-    [SerializeField] private Text text;
+    public Image panel;
+    public Text text;
 }
 
 [System.Serializable]
 
 public class PlayerColor
 {
-    [SerializeField] private Color panalColor;
-    [SerializeField] private Color textColor;
+    public Color panelColor;
+    public Color textColor;
 }
 
 
@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour
         moveCount = 0;
         reStartGame.SetActive(false);
         playerMove = true;
+        SetPlayerColor(playerX,playerO);
     }
     private void SetGameControllerOnButton()
     {
@@ -103,6 +104,14 @@ public class GameController : MonoBehaviour
         ChangeSide();
     }
 
+    public void SetPlayerColor(Player newPlayer , Player oldPlayer)
+    {
+        newPlayer.panel.color = activePlayerColor.panelColor;
+        newPlayer.text.color = activePlayerColor.textColor;
+        oldPlayer.panel.color = inactivePlayerColor.panelColor;
+        oldPlayer.text.color = inactivePlayerColor.textColor;
+    }
+
     public void GameOver(string winningPlayer)
     {
         SetBoardInteractable(false);
@@ -122,6 +131,16 @@ public class GameController : MonoBehaviour
     public void ChangeSide()
     {
         playerSide = (playerSide == "X") ? "O" : "X";
+
+        if (playerSide == "X")
+        {
+            SetPlayerColor(playerX, playerO);
+        }
+        else
+        {
+            SetPlayerColor(playerO, playerX);
+
+        }
     }
 
     public void SetGameOverText(string value)
@@ -143,6 +162,8 @@ public class GameController : MonoBehaviour
         {
             buttonlist[i].text = "";
         }
+
+        SetPlayerColor(playerX, playerO);
         reStartGame.SetActive(false);
     }
     public void SetBoardInteractable(bool toggle)
