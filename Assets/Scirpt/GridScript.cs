@@ -9,10 +9,18 @@ public class GridScript : MonoBehaviour
     [SerializeField] private Text butttontext;
     [SerializeField] private string playerSide;
 
+    private GameController gameController;
+
     public void SetSpace()
     {
-        butttontext.text = playerSide;
+        butttontext.text = gameController.GetPlayerSide();
         button.interactable = false;
+        gameController.EndTurn();
+    }
+
+    public void SetGameContorller(GameController controller)
+    {
+        gameController = controller;
     }
 
 }
