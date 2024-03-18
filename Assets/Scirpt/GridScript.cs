@@ -13,9 +13,12 @@ public class GridScript : MonoBehaviour
 
     public void SetSpace()
     {
-        butttontext.text = gameController.GetPlayerSide();
-        button.interactable = false;
-        gameController.EndTurn();
+        if (gameController.playerMove == true)
+        {
+            butttontext.text = gameController.GetPlayerSide();
+            button.interactable = false;
+            gameController.EndTurn();
+        }
     }
 
     public void SetGameContorller(GameController controller)
