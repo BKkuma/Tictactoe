@@ -26,7 +26,6 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject gameOverPanal;
     [SerializeField] private Text gameOverText;
     [SerializeField] private GameObject reStartGame;
-    public float delay;
     [SerializeField] private Player playerX;
     [SerializeField] private Player playerO;
     [SerializeField] private PlayerColor activePlayerColor;
@@ -37,6 +36,8 @@ public class GameController : MonoBehaviour
     private int value;
     private int moveCount;
     public bool playerMove;
+    public float delay;
+
 
 
     private void Awake()
@@ -50,7 +51,7 @@ public class GameController : MonoBehaviour
 
     public void Update()
     {
-        if (playerMove)
+        if (playerMove == false)
         {
             delay += delay * Time.deltaTime;
             if(delay >= 100 )
@@ -144,35 +145,35 @@ public class GameController : MonoBehaviour
         }
 
 
-        else if (buttonlist[0].text == playerSide && buttonlist[1].text == playerSide && buttonlist[2].text == playerSide)
+        else if (buttonlist[0].text == aiSide && buttonlist[1].text == aiSide && buttonlist[2].text == aiSide)
         {
             GameOver(aiSide);
         }
-        else if (buttonlist[3].text == playerSide && buttonlist[4].text == playerSide && buttonlist[5].text == playerSide)
+        else if (buttonlist[3].text == aiSide && buttonlist[4].text == aiSide && buttonlist[5].text == aiSide)
         {
             GameOver(aiSide);
         }
-        else if (buttonlist[6].text == playerSide && buttonlist[7].text == playerSide && buttonlist[8].text == playerSide)
+        else if (buttonlist[6].text == aiSide && buttonlist[7].text == aiSide && buttonlist[8].text == aiSide)
         {
             GameOver(aiSide);
         }
-        else if (buttonlist[0].text == playerSide && buttonlist[3].text == playerSide && buttonlist[6].text == playerSide)
+        else if (buttonlist[0].text == aiSide && buttonlist[3].text == aiSide && buttonlist[6].text == aiSide)
         {
             GameOver(aiSide);
         }
-        else if (buttonlist[1].text == playerSide && buttonlist[4].text == playerSide && buttonlist[7].text == playerSide)
+        else if (buttonlist[1].text == aiSide && buttonlist[4].text == aiSide && buttonlist[7].text == aiSide)
         {
             GameOver(aiSide);
         }
-        else if (buttonlist[2].text == playerSide && buttonlist[5].text == playerSide && buttonlist[8].text == playerSide)
+        else if (buttonlist[2].text == aiSide && buttonlist[5].text == aiSide && buttonlist[8].text == aiSide)
         {   
             GameOver(aiSide);
         }
-        else if (buttonlist[0].text == playerSide && buttonlist[4].text == playerSide && buttonlist[8].text == playerSide)
+        else if (buttonlist[0].text == aiSide && buttonlist[4].text == aiSide && buttonlist[8].text == aiSide)
         {
             GameOver(aiSide);
         }
-        else if (buttonlist[2].text == playerSide && buttonlist[4].text == playerSide && buttonlist[6].text == playerSide)
+        else if (buttonlist[2].text == aiSide && buttonlist[4].text == aiSide && buttonlist[6].text == aiSide)
         {
             GameOver(aiSide);
         }
@@ -210,7 +211,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            SetGameOverText(playerSide + " You are very strong!");
+            SetGameOverText(winningPlayer + " You are very strong!");
         }
         reStartGame.SetActive(true);
 
@@ -218,7 +219,6 @@ public class GameController : MonoBehaviour
 
     public void ChangeSide()
     {
-        //playerSide = (playerSide == "X") ? "O" : "X";
         playerMove = (playerMove == true) ? false : true;
 
         if (playerMove == true) 
